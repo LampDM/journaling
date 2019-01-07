@@ -27,7 +27,7 @@ import javax.activation.*;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Log
-public class EmailingResource {
+public class JournalingResource {
 
     @PersistenceContext
     private EntityManager em;
