@@ -19,7 +19,7 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
-
+import com.kumuluz.ee.samples.microservices.simple.Models.Entry;
 
 
 @Path("/journal")
@@ -51,12 +51,23 @@ public class JournalingResource {
     }
 
     @POST
-    @Path("/journal")
-    public Response makeJournal(String emailJSON) {
+    @Path("/insertJournal")
+    public Response makeJournal(Entry entry) {
         //TODO actual journaling
         LOG.trace("New journal!");
 
-        return Response.status(Response.Status.OK).entity(emailJSON).build();
+        em.getTransaction().begin();
+
+        em.persist(entry);
+
+        em.getTransaction().commit();
+
+
+        JSONObject obj = new JSONObject();
+
+        obj.put("journaling", "logging data");
+
+        return Response.status(Response.Status.OK).entity(obj).build();
     }
 
 }
