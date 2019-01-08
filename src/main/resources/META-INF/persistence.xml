@@ -5,9 +5,12 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
-    <persistence-unit name="carts" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="journal" transaction-type="RESOURCE_LOCAL">
 
         <non-jta-data-source>jdbc/BooksDS</non-jta-data-source>
+
+
+        <class>com.kumuluz.ee.samples.microservices.simple.Models.Entry</class>
 
 
         <properties>

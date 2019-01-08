@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "journal")
-@NamedQuery(name = "journal.findAll", query = "SELECT e FROM Entry e")
+//@NamedQuery(name = "journal.findAll", query = "SELECT e FROM Entry e")
 public class Entry {
 
     @Id
