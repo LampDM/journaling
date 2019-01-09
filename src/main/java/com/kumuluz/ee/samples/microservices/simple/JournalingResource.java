@@ -38,36 +38,26 @@ public class JournalingResource {
 
     @GET
     public Response showJournal() {
-        JSONObject obj = new JSONObject();
-        //send mail here from url params
 
-        //TODO da je pro SMTP server
-
-        obj.put("journaling", "logging data");
-
-
-
-        return Response.ok(obj.toString()).build();
+        return Response.status(Response.Status.OK).build();
     }
 
     @POST
     @Path("/insertJournal")
-    public Response makeJournal(Entry entry) {
-        //TODO actual journaling
-        LOG.trace("New journal!");
+    public Response insertJournal(Entry entry) {
 
-        em.getTransaction().begin();
+        try{
+            em.getTransaction().begin();
+            entry.setId(null);
+            em.persist(entry);
 
-        em.persist(entry);
+            em.getTransaction().commit();
+            LOG.trace("New journal entry created!");
+            return Response.status(Response.Status.CREATED).entity(entry).build();
 
-        em.getTransaction().commit();
+        }catch(Exception ex){
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 
-
-        JSONObject obj = new JSONObject();
-
-        obj.put("journaling", "logging data");
-
-        return Response.status(Response.Status.OK).entity(obj).build();
+        }
     }
-
 }
