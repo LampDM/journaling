@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: journaling
-          image: markoambrozic/journaling:1.0.2
+          image: markoambrozic/journaling:1.0.3
           ports:
             - containerPort: 8080
           env:
